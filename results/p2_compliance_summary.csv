@@ -1,0 +1,7 @@
+rule,compliance,n
+first_data_tool_ok,0.3303834808259587,339
+wrote_todos,0.9970501474926253,339
+called_candidate_rank,0.9970501474926253,339
+summary_before_draft,0.9941002949852508,339
+fault_indicators_on_top,0.9970501474926253,339
+critic_once,0.9882005899705014,339

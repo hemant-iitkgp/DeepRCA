@@ -1,0 +1,15 @@
+method,dataset,fault,n,main_py_avg5,ours_avg5,ours_ac1,match
+dummy,RE2-OB,cpu,15,0.44,0.44,0.2,True
+dummy,RE2-OB,mem,15,0.41,0.41,0.2667,True
+dummy,RE2-OB,disk,15,0.45,0.45,0.2,True
+dummy,RE2-OB,socket,15,0.45,0.45,0.0,True
+dummy,RE2-OB,delay,15,0.17,0.17,0.0667,True
+dummy,RE2-OB,loss,15,0.16,0.16,0.1333,True
+dummy,RE2-OB,all,90,,0.3489,0.1444,
+baro,RE2-OB,cpu,15,0.64,0.64,0.0,True
+baro,RE2-OB,mem,15,0.87,0.87,0.3333,True
+baro,RE2-OB,disk,15,0.81,0.81,0.1333,True
+baro,RE2-OB,socket,15,0.67,0.67,0.0,True
+baro,RE2-OB,delay,15,0.67,0.67,0.0,True
+baro,RE2-OB,loss,15,0.8,0.8,0.4,True
+baro,RE2-OB,all,90,,0.7422,0.1444,

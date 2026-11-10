@@ -1,0 +1,92 @@
+data_source,method,fault,n_cases,AC@1,AC@3,Avg@5
+this work,Ours (V3),cpu,4,0.75,1.0,0.9
+this work,Ours (V3),mem,4,0.75,1.0,0.9
+this work,Ours (V3),disk,4,1.0,1.0,1.0
+this work,Ours (V3),socket,4,1.0,1.0,1.0
+this work,Ours (V3),delay,4,1.0,1.0,1.0
+this work,Ours (V3),loss,3,1.0,1.0,1.0
+this work,Ours (V3),AVERAGE,23,0.9166666666666666,1.0,0.9666666666666667
+this work,Control (z-score),cpu,4,0.0,0.5,0.4
+this work,Control (z-score),mem,4,0.5,0.75,0.7
+this work,Control (z-score),disk,4,1.0,1.0,1.0
+this work,Control (z-score),socket,4,0.25,0.25,0.25
+this work,Control (z-score),delay,4,0.0,0.25,0.25
+this work,Control (z-score),loss,3,0.3333333333333333,0.3333333333333333,0.4666666666666666
+this work,Control (z-score),AVERAGE,23,0.34722222222222227,0.513888888888889,0.5111111111111112
+Metric,BARO,cpu,15,0.47,0.8,0.72
+Metric,BARO,mem,15,0.93,1.0,0.99
+Metric,BARO,disk,15,1.0,1.0,1.0
+Metric,BARO,socket,15,0.6,0.87,0.83
+Metric,BARO,delay,15,0.47,0.67,0.63
+Metric,BARO,loss,15,0.53,0.6,0.64
+Metric,BARO,AVERAGE,90,0.67,0.82,0.8
+Metric,CausalRCA,cpu,15,0.4,0.63,0.59
+Metric,CausalRCA,mem,15,0.1,0.27,0.24
+Metric,CausalRCA,disk,15,0.43,0.83,0.75
+Metric,CausalRCA,socket,15,0.23,0.5,0.45
+Metric,CausalRCA,delay,15,0.13,0.23,0.21
+Metric,CausalRCA,loss,15,0.03,0.37,0.33
+Metric,CausalRCA,AVERAGE,90,0.22,0.47,0.43
+Metric,CIRCA,cpu,15,0.27,0.27,0.28
+Metric,CIRCA,mem,15,0.47,0.73,0.68
+Metric,CIRCA,disk,15,0.53,0.67,0.64
+Metric,CIRCA,socket,15,0.27,0.53,0.52
+Metric,CIRCA,delay,15,0.2,0.27,0.28
+Metric,CIRCA,loss,15,0.2,0.33,0.35
+Metric,CIRCA,AVERAGE,90,0.32,0.47,0.46
+Metric,MicroCause,cpu,15,0.19,0.44,0.4
+Metric,MicroCause,mem,15,0.0,0.09,0.07
+Metric,MicroCause,disk,15,0.4,0.4,0.4
+Metric,MicroCause,socket,15,0.0,0.17,0.15
+Metric,MicroCause,delay,15,0.0,0.22,0.13
+Metric,MicroCause,loss,15,0.0,0.0,0.07
+Metric,MicroCause,AVERAGE,90,0.1,0.22,0.2
+Metric,RCD,cpu,15,0.13,0.13,0.16
+Metric,RCD,mem,15,0.07,0.07,0.07
+Metric,RCD,disk,15,0.0,0.07,0.05
+Metric,RCD,socket,15,0.13,0.33,0.29
+Metric,RCD,delay,15,0.13,0.13,0.15
+Metric,RCD,loss,15,0.07,0.07,0.07
+Metric,RCD,AVERAGE,90,0.09,0.13,0.13
+Trace,MicroRank,cpu,15,0.21,0.43,0.34
+Trace,MicroRank,mem,15,0.25,0.38,0.33
+Trace,MicroRank,disk,15,0.0,0.36,0.27
+Trace,MicroRank,socket,15,0.3,0.4,0.36
+Trace,MicroRank,delay,15,0.08,0.31,0.23
+Trace,MicroRank,loss,15,0.14,0.36,0.3
+Trace,MicroRank,AVERAGE,90,0.16,0.37,0.31
+Trace,TraceRCA,cpu,15,0.64,0.79,0.74
+Trace,TraceRCA,mem,15,0.63,0.88,0.83
+Trace,TraceRCA,disk,15,0.64,0.71,0.74
+Trace,TraceRCA,socket,15,0.6,0.8,0.76
+Trace,TraceRCA,delay,15,0.85,0.85,0.88
+Trace,TraceRCA,loss,15,0.57,0.71,0.67
+Trace,TraceRCA,AVERAGE,90,0.66,0.79,0.77
+Multi-source,BARO,cpu,15,0.47,0.8,0.75
+Multi-source,BARO,mem,15,0.93,1.0,0.99
+Multi-source,BARO,disk,15,1.0,1.0,1.0
+Multi-source,BARO,socket,15,0.6,0.8,0.79
+Multi-source,BARO,delay,15,0.47,0.67,0.61
+Multi-source,BARO,loss,15,0.67,0.67,0.71
+Multi-source,BARO,AVERAGE,90,0.69,0.82,0.81
+Multi-source,CIRCA,cpu,15,0.0,0.07,0.09
+Multi-source,CIRCA,mem,15,0.07,0.13,0.21
+Multi-source,CIRCA,disk,15,0.0,0.07,0.09
+Multi-source,CIRCA,socket,15,0.07,0.13,0.16
+Multi-source,CIRCA,delay,15,0.07,0.07,0.07
+Multi-source,CIRCA,loss,15,0.13,0.2,0.17
+Multi-source,CIRCA,AVERAGE,90,0.06,0.11,0.13
+Multi-source,PDiagnose,cpu,15,0.6,0.87,0.81
+Multi-source,PDiagnose,mem,15,0.4,0.47,0.48
+Multi-source,PDiagnose,disk,15,0.33,0.73,0.69
+Multi-source,PDiagnose,socket,15,0.33,0.67,0.6
+Multi-source,PDiagnose,delay,15,0.87,0.87,0.87
+Multi-source,PDiagnose,loss,15,0.33,0.6,0.57
+Multi-source,PDiagnose,AVERAGE,90,0.48,0.7,0.67
+Multi-source,RCD,cpu,15,0.17,0.84,0.72
+Multi-source,RCD,mem,15,0.0,0.44,0.39
+Multi-source,RCD,disk,15,0.07,0.76,0.62
+Multi-source,RCD,socket,15,0.21,0.77,0.66
+Multi-source,RCD,delay,15,0.05,0.28,0.25
+Multi-source,RCD,loss,15,0.07,0.75,0.6
+Multi-source,RCD,AVERAGE,90,0.1,0.64,0.54

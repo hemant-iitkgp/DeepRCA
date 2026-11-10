@@ -1,0 +1,105 @@
+# Every data-dependent and tunable setting lives here (SPEC 3.3). No service, system or
+# dataset names. Values marked "dev-tuned" may only change from dev-split evidence and are
+# frozen at part1-frozen.
+
+# ---------------------------------------------------------------- windows
+window:
+  # Same as RCAEval's baselines (main.py --length 20): up to 600 one-second rows on each
+  # side of the injection time. Datasets with less pre-fault data use all they have.
+  baseline_seconds: 600
+  analysis_seconds: 600
+
+# ---------------------------------------------------------------- adapter
+adapter:
+  # Metric column = "<entity>_<metric>"; entity is the text before the first "_".
+  metric_column_split: "_"
+  # Monotonic counters are converted to per-second rates (negative steps = counter reset -> NaN).
+  counter_suffix_regex: "(-total|_total)$"
+  # Metrics from the derived service-level file keep their short names (the indicator vocabulary
+  # RCAEval scores against); raw container/istio/node metrics keep their full names.
+  drop_metric_regex: "(spec-cpu-quota|spec-memory-limit-bytes|latency-50$)"
+  # Metric entities whose name is an IP-address-shaped host (e.g. a node exporter "a-b-c-d-port", or "ip-a-b-c-d...")
+  # are hosts, not services, even when no pod-to-node file exists (RE1).
+  node_entity_regex: "^(\\d{1,3}-){3}\\d{1,3}(-\\d+)?$|^ip-(\\d{1,3}-){3}\\d{1,3}"
+  # Pod name -> service: strip a trailing ReplicaSet hash and pod suffix (deployment naming).
+  pod_service_regex: "^(?P<service>.+?)-[a-z0-9]{6,10}-[a-z0-9]{5}$"
+  # Trace service names that do not match a metric entity are matched by normalised name:
+  # lowercase, drop non-alphanumerics, drop the trailing word "service".
+  name_normalise:
+    strip_suffixes: ["service"]
+  # Span status: values counted as errors (HTTP >= 500, gRPC non-zero codes handled per value type)
+  error_status_http_min: 500
+  # Drain3 template miner, fitted on the baseline window only
+  drain:
+    sim_th: 0.4
+    depth: 4
+    max_children: 100
+    max_lines_per_case: 400000   # cap per case for very large logs (sampled uniformly, recorded)
+
+# ---------------------------------------------------------------- metric types
+# First matching pattern wins (regex on the metric name, case-insensitive).
+metric_types:
+  - {type: latency,    regex: "latency|duration|response-time"}
+  - {type: error,      regex: "error|errs|fail|5xx"}
+  - {type: cpu,        regex: "cpu"}
+  - {type: memory,     regex: "mem"}
+  - {type: disk,       regex: "disk|fs-|blkio"}
+  - {type: network,    regex: "socket|network|packets|bytes|drop"}
+  - {type: throughput, regex: "workload|load|request|qps"}
+  - {type: other,      regex: ".*"}
+
+# Short indicator names used in ranked indicators (RCAEval's vocabulary), per metric type.
+# A metric whose own short name is already an indicator keeps it.
+indicator_names: [cpu, mem, diskio, socket, latency, error, workload]
+indicator_for_type: {cpu: cpu, memory: mem, disk: diskio, network: socket, latency: latency, error: error, throughput: workload}
+
+# ---------------------------------------------------------------- control (SPEC 1.3 / Phase 2)
+control:
+  z_anomalous: 2.5          # "anomalous" threshold (fixed by the SPEC)
+  min_baseline_std: 1.0e-9  # channels with zero baseline variance are skipped
+
+# ---------------------------------------------------------------- tools (dev-tuned)
+tools:
+  max_tokens_per_result: 2000
+  select_traces_k: 5
+  # span scores are in units of the operation's baseline spread (p99 - p50); a flagged span must
+  # also exceed the baseline p99, and its operation must be shifted in the window (key_shift)
+  own_time_z: 1.0
+  edge_gap_z: 1.0
+  key_shift: 0.5            # (window p75 - baseline p75) / baseline spread
+  error_rate_rise: 0.05     # window error rate must exceed baseline rate by this (and be 2x)
+  min_abs_ms: 1.0           # ignore deviations smaller than this many ms
+  max_service_items: 12     # no-trace mode: anomalous services registered as work items
+  metric_n_sigma: 3.0
+  metric_delta_s: 60
+  log_spike_ratio: 3.0
+  log_min_count: 5
+
+# ---------------------------------------------------------------- limits (SPEC 3.6)
+limits:
+  max_subagent_launches: 40
+  parallel_subagents: 4          # lowered from 8 for per-project request quotas (WORKLOG)
+  max_tokens_per_case: 1500000
+  wall_clock_seconds: 7200       # raised for throttled trial-project quotas (WORKLOG; 1200 -> 3600 -> 7200)
+  max_submit_attempts: 3
+  max_drafts: 5             # drafts failing the pre-check; the 5th becomes a forced report
+  # per sub-agent run: tool calls beyond this are blocked so the agent must answer; model calls are a hard stop
+  subagent_tool_calls: {span-investigator: 10, hypothesis-tester: 10, critic: 8}
+  subagent_model_calls: 16
+  main_model_calls: 60
+
+# ---------------------------------------------------------------- variant switches (SPEC 7.11)
+variant:
+  mode: full            # full | single_agent | code_loop
+  guardrail: "on"
+  critic: "on"
+  model: primary        # key in models.yaml
+  injection: null       # path to a planted-lead spec (A2), off by default
+  anonymize: "off"
+  fault_time: provided  # provided | detect
+  traces: "on"          # "off" hides traces (no-trace path on any case; dev work on the no-trace path, SPEC E3)
+
+# ---------------------------------------------------------------- gate (SPEC 7.8, dev-tuned)
+gate:
+  max_anomalous_services: null
+  min_z_margin: null

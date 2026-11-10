@@ -1,0 +1,76 @@
+# Pinned models (final decision 2026-10-25 from the dev pilot, see WORKLOG). Gemini runs at its default
+# temperature (temperature 0 breaks Gemini 3 tool calls), fixed seed and fixed thinking level. The model version
+# reported by the API is checked on every response; a mismatch stops the run.
+# Served through Google Vertex AI with a credential file per Google Cloud project (outside git).
+default: primary
+
+models:
+  primary:                              # Gemini 3.7 Flash: chosen on the dev pilot (pilot_fallback)
+    provider: vertex
+    request_id: gemini-3.7-flash
+    expected_snapshot: gemini-3.7-flash
+    temperature: null
+    seed: 7
+    thinking_level: medium
+    max_output_tokens: 16384
+    # Vertex list price (introductory until 2026-12-31; $1.50 / $7.50 from 2027-01-01). Cached input price
+    # not found; the input price is used for cached tokens, which overstates cost.
+    price_input_per_mtok: 0.75
+    price_cached_input_per_mtok: null
+    price_output_per_mtok: 3.75
+  small:                                # Part 2 backbone ablation (SPEC V3-mini): a smaller model of the same family
+    provider: vertex
+    request_id: gemini-3.5-flash-lite
+    expected_snapshot: gemini-3.5-flash-lite
+    temperature: null
+    seed: 7
+    thinking_level: medium
+    max_output_tokens: 16384
+    price_input_per_mtok: 0.30
+    price_cached_input_per_mtok: 0.03
+    price_output_per_mtok: 2.50
+
+  # ---- dev pilot history (not used for reported runs) ----
+  pro31:                                # pilot_primary: Gemini 3.1 Pro preview, low thinking (capacity-limited)
+    provider: vertex
+    request_id: gemini-3.1-pro-preview
+    expected_snapshot: gemini-3.1-pro-preview
+    temperature: null
+    seed: 7
+    thinking_level: low
+    max_output_tokens: 16384
+    price_input_per_mtok: 2.00
+    price_cached_input_per_mtok: 0.20
+    price_output_per_mtok: 12.00
+  argon:                                # pilot_argon: Gemini 4 Argon (capacity-limited; no published price)
+    provider: vertex
+    request_id: gemini-4-argon
+    expected_snapshot: gemini-4-argon
+    temperature: null
+    seed: 7
+    thinking_level: null
+    max_output_tokens: 16384
+    price_input_per_mtok: null
+    price_cached_input_per_mtok: null
+    price_output_per_mtok: null
+  fallback:                             # pilot_fallback: identical to primary (kept so the pilot runs resolve)
+    provider: vertex
+    request_id: gemini-3.7-flash
+    expected_snapshot: gemini-3.7-flash
+    temperature: null
+    seed: 7
+    thinking_level: medium
+    max_output_tokens: 16384
+    price_input_per_mtok: 0.75
+    price_cached_input_per_mtok: null
+    price_output_per_mtok: 3.75
+  gpt4o_mini_dev:                       # dev_v1-dev_v4: OpenAI gpt-4o-mini, before the OpenAI credit ran out
+    provider: openai
+    request_id: gpt-4o-mini
+    expected_snapshot: gpt-4o-mini-2024-07-18
+    temperature: 0
+    seed: 7
+    max_output_tokens: 4096
+    price_input_per_mtok: 0.15
+    price_cached_input_per_mtok: 0.075
+    price_output_per_mtok: 0.60

@@ -1,0 +1,211 @@
+{
+ "run_id": "smoke_final_model",
+ "started": "2026-10-26 00:18:26",
+ "git_commit": "c1738ce0c7112592af9ecece6202f9894761fa54",
+ "cases": "c50e54490db,c038a3fc481,c0849215fce",
+ "datasets": null,
+ "n_cases": 3,
+ "variant_overrides": {
+  "model": "primary"
+ },
+ "system_config": {
+  "window": {
+   "baseline_seconds": 600,
+   "analysis_seconds": 600
+  },
+  "adapter": {
+   "metric_column_split": "_",
+   "counter_suffix_regex": "(-total|_total)$",
+   "drop_metric_regex": "(spec-cpu-quota|spec-memory-limit-bytes|latency-50$)",
+   "node_entity_regex": "^(\\d{1,3}-){3}\\d{1,3}(-\\d+)?$|^ip-(\\d{1,3}-){3}\\d{1,3}",
+   "pod_service_regex": "^(?P<service>.+?)-[a-z0-9]{6,10}-[a-z0-9]{5}$",
+   "name_normalise": {
+    "strip_suffixes": [
+     "service"
+    ]
+   },
+   "error_status_http_min": 500,
+   "drain": {
+    "sim_th": 0.4,
+    "depth": 4,
+    "max_children": 100,
+    "max_lines_per_case": 400000
+   }
+  },
+  "metric_types": [
+   {
+    "type": "latency",
+    "regex": "latency|duration|response-time"
+   },
+   {
+    "type": "error",
+    "regex": "error|errs|fail|5xx"
+   },
+   {
+    "type": "cpu",
+    "regex": "cpu"
+   },
+   {
+    "type": "memory",
+    "regex": "mem"
+   },
+   {
+    "type": "disk",
+    "regex": "disk|fs-|blkio"
+   },
+   {
+    "type": "network",
+    "regex": "socket|network|packets|bytes|drop"
+   },
+   {
+    "type": "throughput",
+    "regex": "workload|load|request|qps"
+   },
+   {
+    "type": "other",
+    "regex": ".*"
+   }
+  ],
+  "indicator_names": [
+   "cpu",
+   "mem",
+   "diskio",
+   "socket",
+   "latency",
+   "error",
+   "workload"
+  ],
+  "indicator_for_type": {
+   "cpu": "cpu",
+   "memory": "mem",
+   "disk": "diskio",
+   "network": "socket",
+   "latency": "latency",
+   "error": "error",
+   "throughput": "workload"
+  },
+  "control": {
+   "z_anomalous": 2.5,
+   "min_baseline_std": 1e-09
+  },
+  "tools": {
+   "max_tokens_per_result": 2000,
+   "select_traces_k": 5,
+   "own_time_z": 1.0,
+   "edge_gap_z": 1.0,
+   "key_shift": 0.5,
+   "error_rate_rise": 0.05,
+   "min_abs_ms": 1.0,
+   "max_service_items": 12,
+   "metric_n_sigma": 3.0,
+   "metric_delta_s": 60,
+   "log_spike_ratio": 3.0,
+   "log_min_count": 5
+  },
+  "limits": {
+   "max_subagent_launches": 40,
+   "parallel_subagents": 4,
+   "max_tokens_per_case": 1500000,
+   "wall_clock_seconds": 3600,
+   "max_submit_attempts": 3,
+   "max_drafts": 5,
+   "subagent_tool_calls": {
+    "span-investigator": 10,
+    "hypothesis-tester": 10,
+    "critic": 8
+   },
+   "subagent_model_calls": 16,
+   "main_model_calls": 60
+  },
+  "variant": {
+   "mode": "full",
+   "guardrail": "on",
+   "critic": "on",
+   "model": "primary",
+   "injection": null,
+   "anonymize": "off",
+   "fault_time": "provided",
+   "traces": "on"
+  },
+  "gate": {
+   "max_anomalous_services": null,
+   "min_z_margin": null
+  }
+ },
+ "models": {
+  "default": "primary",
+  "models": {
+   "primary": {
+    "provider": "vertex",
+    "request_id": "gemini-3.7-flash",
+    "expected_snapshot": "gemini-3.7-flash",
+    "temperature": null,
+    "seed": 7,
+    "thinking_level": "medium",
+    "max_output_tokens": 16384,
+    "price_input_per_mtok": 0.75,
+    "price_cached_input_per_mtok": null,
+    "price_output_per_mtok": 3.75
+   },
+   "small": {
+    "provider": "vertex",
+    "request_id": "gemini-3.5-flash-lite",
+    "expected_snapshot": "gemini-3.5-flash-lite",
+    "temperature": null,
+    "seed": 7,
+    "thinking_level": "medium",
+    "max_output_tokens": 16384,
+    "price_input_per_mtok": 0.3,
+    "price_cached_input_per_mtok": 0.03,
+    "price_output_per_mtok": 2.5
+   },
+   "pro31": {
+    "provider": "vertex",
+    "request_id": "gemini-3.1-pro-preview",
+    "expected_snapshot": "gemini-3.1-pro-preview",
+    "temperature": null,
+    "seed": 7,
+    "thinking_level": "low",
+    "max_output_tokens": 16384,
+    "price_input_per_mtok": 2.0,
+    "price_cached_input_per_mtok": 0.2,
+    "price_output_per_mtok": 12.0
+   },
+   "argon": {
+    "provider": "vertex",
+    "request_id": "gemini-4-argon",
+    "expected_snapshot": "gemini-4-argon",
+    "temperature": null,
+    "seed": 7,
+    "thinking_level": null,
+    "max_output_tokens": 16384,
+    "price_input_per_mtok": null,
+    "price_cached_input_per_mtok": null,
+    "price_output_per_mtok": null
+   },
+   "fallback": {
+    "provider": "vertex",
+    "request_id": "gemini-3.7-flash",
+    "expected_snapshot": "gemini-3.7-flash",
+    "temperature": null,
+    "seed": 7,
+    "thinking_level": "medium",
+    "max_output_tokens": 16384,
+    "price_input_per_mtok": 0.75,
+    "price_cached_input_per_mtok": null,
+    "price_output_per_mtok": 3.75
+   },
+   "gpt4o_mini_dev": {
+    "provider": "openai",
+    "request_id": "gpt-4o-mini",
+    "expected_snapshot": "gpt-4o-mini-2024-07-18",
+    "temperature": 0,
+    "seed": 7,
+    "max_output_tokens": 4096,
+    "price_input_per_mtok": 0.15,
+    "price_cached_input_per_mtok": 0.075,
+    "price_output_per_mtok": 0.6
+   }
+  }
+ }
+}

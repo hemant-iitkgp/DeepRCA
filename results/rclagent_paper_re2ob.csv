@@ -1,0 +1,17 @@
+source,paradigm,method,n_cases,R1,R3,R5,R10,MRR
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,CRISP,,14.31,25.99,39.13,47.65,24.83
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,TraceContrast,,39.45,45.33,56.72,60.08,45.79
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,TraceRCA,,23.34,45.51,57.39,61.38,38.17
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,MicroRank,,16.23,29.39,32.58,39.13,24.73
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,RUN,,12.34,25.76,37.64,45.95,23.43
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,MicroScope,,13.38,28.79,40.05,53.34,26.16
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,CausalRCA,,23.39,44.32,58.67,66.15,36.18
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,Eadro,,19.13,43.95,63.02,69.37,37.31
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,Nezha,,0.0,0.0,0.0,1.1,0.56
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",non-LLM,BARO,,18.89,92.22,100.0,100.0,55.11
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",LLM,CoT,,13.67,20.18,23.16,28.81,18.34
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",LLM,RCAgent,,25.32,31.09,39.19,45.83,31.28
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",LLM,mABC,,39.98,42.13,44.95,47.87,41.76
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",LLM,GALA,,45.59,66.83,75.32,78.94,58.93
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",LLM,RCLAgent (Claude-3.5-Sonnet),,52.31,63.15,79.39,85.96,62.97
+"arXiv:2605.14866v1, Table I, RCAEval (RE2-OB) columns",LLM,RCLAgent (Qwen-3.6-Plus),,56.67,80.0,86.67,100.0,71.03

@@ -1,0 +1,7 @@
+system,model,data,n,AC@1,control_AC@1,source,gain_over_control
+DeepRCA,Gemini 3.7 Flash,RE2-TT (unseen),46,0.8478260869565217,0.391304347826087,results/wave_w12_r1_cases.csv,0.45652173913043476
+DeepRCA,Gemini 3.7 Flash,all 6 unseen datasets,245,0.6612244897959184,0.5551020408163265,results/wave_w12_r1_cases.csv,0.10612244897959189
+DeepRCA,Gemini 3.7 Flash,RE2-SS + RE2-TT (unseen),90,0.8555555555555556,0.5666666666666665,results/rclagent_compare_w12_r1.csv,0.2888888888888891
+OmniRCA,GPT-4o,RE2-TT (unseen),28,0.42857142857142855,0.6071428571428571,OmniRCA Under Test report (transcribed),-0.17857142857142855
+OmniRCA,GPT-4o,RE2-OB + RE2-TT (unseen),58,0.5517241379310345,0.6551724137931034,OmniRCA Under Test report (transcribed),-0.10344827586206895
+RCLAgent,Claude-3.5-Sonnet,RE2-OB (paper),90,0.5231,0.1889,arXiv:2605.14866v1 Table I (control = its BARO row),0.3342

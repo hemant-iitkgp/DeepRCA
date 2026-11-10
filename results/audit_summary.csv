@@ -1,0 +1,10 @@
+dataset,cases,services_injected,faults,cases_with_metrics,cases_with_logs,cases_with_traces,cases_with_parent_span,cases_with_inject_time,inject_time_units,metric_time_units,metric_step_s_median,metric_cols_min,metric_cols_max,pre_fault_min_median,post_fault_min_median,size_mb_min,size_mb_median,size_mb_max,size_mb_total
+RE1-OB,125,5,cpu;delay;disk;loss;mem,125,0,0,0,125,s,s,1.0,50,59,6.0,6.0,0.55,0.58,2.72,175.0
+RE1-SS,125,5,cpu;delay;disk;loss;mem,125,0,0,0,125,s,s,1.0,420,438,6.0,6.0,3.63,4.1,4.14,507.6
+RE1-TT,125,5,cpu;delay;disk;loss;mem,125,0,0,0,125,s,s,1.0,1179,1445,8.0,8.0,13.65,15.06,15.95,1881.0
+RE2-OB,90,5,cpu;delay;disk;loss;mem;socket,90,90,90,90,90,s,s,1.0,401,461,12.0,12.0,51.88,97.875,106.71,8553.2
+RE2-SS,90,5,cpu;delay;disk;loss;mem;socket,90,90,0,0,90,s,s,1.0,433,452,12.0,12.0,18.27,25.62,33.39,2323.1
+RE2-TT,90,5,cpu;delay;disk;loss;mem;socket,90,90,90,90,90,s,s,1.0,1509,1581,12.0,12.0,63.96,271.935,419.73,23334.4
+RE3-OB,30,4,f1;f2;f3;f4;f5,30,30,30,30,30,s,s,1.0,388,521,12.0,12.0,37.92,48.489999999999995,51.8,1427.9
+RE3-SS,30,3,f1;f2;f3;f4,30,30,13,13,30,s,s,1.0,437,550,12.0,12.0,19.46,32.84,40.84,934.9
+RE3-TT,30,2,f1;f2;f3;f4,30,30,30,30,30,s,s,1.0,1300,1376,15.0,15.0,36.94,74.78999999999999,110.29,2220.2

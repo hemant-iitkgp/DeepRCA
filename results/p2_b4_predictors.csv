@@ -1,0 +1,16 @@
+feature,outcome,r,n,v3_AC@1,control_AC@1
+n_anomalous,v3,-0.33236683392656136,339,,
+n_anomalous,control,-0.27027038104028395,339,,
+z_margin_log,v3,0.007763193959901787,339,,
+z_margin_log,control,0.29908554263494147,339,,
+n_services,v3,-0.3311889387755656,339,,
+n_services,control,-0.26904849419196714,339,,
+has_traces,v3,0.12417467715584067,339,,
+has_traces,control,-0.13061095522229577,339,,
+work_items,v3,-0.07866006849989245,339,,
+work_items,control,0.0449777054335535,339,,
+subagents,v3,-0.12728078431534529,339,,
+subagents,control,0.006601887666141117,339,,
+n_anomalous tercile: few (11-18),accuracy,,160,0.8625,0.7125
+n_anomalous tercile: middle (19-65),accuracy,,118,0.5338983050847458,0.559322033898305
+n_anomalous tercile: many (69-69),accuracy,,61,0.7540983606557377,0.36065573770491804

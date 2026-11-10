@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+data/raw
+data/canonical
+data/cache
+runs
+*.egg-info/
+.venv/
+credentials/
+*-[0-9a-f]*.json
+kaggle.json

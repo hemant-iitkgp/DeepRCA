@@ -1,0 +1,4 @@
+term,coef
+status,not_fitted
+reason,dev_final has no wrong top-1 answers (59/59 correct) so a correct-vs-wrong model cannot be fitted
+model_used,prior weights in rca/guardrails/confidence.py

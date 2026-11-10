@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepRCA Under Test</title>
+<style>
+:root{--bg:#F7F5F0;--card:#FFFDF8;--ink:#14213D;--muted:#5A6272;--rule:#DDD7CA;--deep:#2C5F9E;--deep-wash:#DCE7F5;--omni:#B4561C;--omni-wash:#F6E3D6;--ctrl:#B8AE98;--good:#2E7D4F;--bad:#A8461A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121A2B;--card:#1A2438;--ink:#E8ECF3;--muted:#A3ACBD;--rule:#2C3850;--deep:#7FAEE8;--deep-wash:#1F3354;--omni:#E8955E;--omni-wash:#3D2A1E;--ctrl:#8C8470;--good:#6CC08F;--bad:#E8955E}}
+:root[data-theme="dark"]{--bg:#121A2B;--card:#1A2438;--ink:#E8ECF3;--muted:#A3ACBD;--rule:#2C3850;--deep:#7FAEE8;--deep-wash:#1F3354;--omni:#E8955E;--omni-wash:#3D2A1E;--ctrl:#8C8470;--good:#6CC08F;--bad:#E8955E}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 16px 80px}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.2}
+h1{font-size:40px;margin:0 0 6px}
+h2{font-size:28px;margin:56px 0 12px;padding-top:16px;border-top:1px solid var(--rule)}
+h3{font-size:20px;margin:28px 0 8px}
+.sub{color:var(--muted);margin:0 0 24px}
+.lede{font-size:18px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
+nav a{color:var(--deep);text-decoration:none;border:1px solid var(--rule);border-radius:999px;padding:4px 12px;font-size:14px;background:var(--card)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:20px 0}
+.tile{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px}
+.tile b{display:block;font-size:30px;font-family:"Source Serif 4",Georgia,serif;color:var(--deep)}
+.tile span{color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 20px;margin:16px 0}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.bars{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:6px 12px;align-items:center;margin:12px 0}
+.bar{height:14px;border-radius:3px}
+.bar.d{background:var(--deep)}.bar.c{background:var(--ctrl)}.bar.o{background:var(--omni)}
+.bl{display:flex;flex-direction:column;gap:3px}
+.bl div{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.src{font-size:13px;color:var(--muted)}
+.ok{color:var(--good);font-weight:600}.no{color:var(--bad);font-weight:600}
+ul{padding-left:20px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.two{grid-template-columns:1fr}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<main>
+<h1>DeepRCA Under Test</h1>
+<p class="sub">MTP · Part 2 system analysis report · 30 October 2026 · frozen system <code>part1-frozen-v2</code> (dd73a19), Gemini 3.7 Flash</p>
+<p class="lede">An agent system for finding the root cause of failures in microservice apps, built to fix what the OmniRCA dissection found, tested on the RCAEval benchmark and taken apart with the same analysis framework.</p>
+
+<div class="tiles">
+<div class="tile"><b>72.9%</b><span>right at #1 on 339 test cases, vs 59.6% for statistics</span></div>
+<div class="tile"><b>66.1%</b><span>on 245 cases from apps it never saw, vs 55.5%</span></div>
+<div class="tile"><b>0 of 40</b><span>baseless planted suspects accepted</span></div>
+<div class="tile"><b>99.7%</b><span>of quoted numbers match the data</span></div>
+</div>
+
+<nav><a href="#problem">Problem</a><a href="#system">System</a><a href="#data">Datasets</a><a href="#results">Results</a><a href="#compare">Comparison</a><a href="#framework">Framework</a><a href="#findings">Findings</a><a href="#verdict">Verdict</a><a href="#limits">Limits</a></nav>
+
+<h2 id="problem">1 · The problem</h2>
+<p>A microservice app is many small services calling each other. When one breaks, many others look broken too: a slow database makes every service waiting on it look slow. The task is to name the one service where the failure started.</p>
+<p>The bar every result here must clear is the <b>statistical control</b>: rank services by their largest metric z-score in the fault window and take the top one. OmniRCA, the previous system, could not beat it on real data (65.9% vs 70.5% on 88 cases, p = 0.455).</p>
+
+<h2 id="system">2 · The system</h2>
+<p>DeepRCA turns each OmniRCA defect into a design rule: split work by <b>evidence</b>, not by role, and enforce rules that must always hold in <b>code</b>, not prompts.</p>
+<div class="wrap"><table>
+<tr><th>Step</th><th>Who</th><th>What happens</th></tr>
+<tr><td>1 · Find suspects</td><td>Code</td><td>Compares the 10 minutes after the fault with the 10 before. Picks 5 abnormal requests and flags steps that are slow inside a service (own time), slow between services (edge gap) or newly failing. Without traces: services with any metric beyond 3σ.</td></tr>
+<tr><td>2 · Investigate</td><td>Span investigators (LLM)</td><td>One per flagged step, in parallel, level by level from a code-kept to-do list. Each checks its service's metrics, logs and fault indicators and writes one structured finding with evidence for and against.</td></tr>
+<tr><td>3 · Test other causes</td><td>Hypothesis testers (LLM)</td><td>The main agent proposes causes traces cannot show (shared machine, shared dependency, code bug, one replica); each tester returns supported, refuted or inconclusive with evidence.</td></tr>
+<tr><td>4 · Reconcile</td><td>Main agent + code</td><td>The statistical ranking unlocks only now. Any high-ranked service no finding covers gets one more tester.</td></tr>
+<tr><td>5 · Draft and critique</td><td>Main agent, critic (LLM)</td><td>A ranked report with fault type and cause-to-symptom path; the critic tries to break it and every issue must be answered.</td></tr>
+<tr><td>6 · Guardrail</td><td>Code</td><td>Rejects a report whose #1 lacks positive evidence of its own, whose path is not connected in the call graph, or that skips a flagged step or critic issue.</td></tr>
+</table></div>
+<p class="src">About 20 code tools; no service, app or dataset names in any prompt, rule or tool. Mean run: $0.35 and about 14 minutes per case (results/wave_w12_r1_ops.csv).</p>
+
+<h2 id="data">3 · Datasets</h2>
+<p>RCAEval: three microservice apps (Online Boutique, Sock Shop, Train Ticket) in three dataset families. RE1 has metrics only; RE2 and RE3 add logs and traces (in our data the Sock Shop sets have no trace file). Tuning used Online Boutique development cases only; the test set is waves 1–2 of the held-out split, 339 cases, one run.</p>
+<p>"<b>Unseen</b>" below means the six Sock Shop and Train Ticket datasets (245 cases): apps DeepRCA never saw during development.</p>
+
+<h2 id="results">4 · Results</h2>
+<h3>Against the statistical control</h3>
+<div class="legend"><span><i style="background:var(--deep)"></i>DeepRCA</span><span><i style="background:var(--ctrl)"></i>Control</span><span><i style="background:var(--omni)"></i>OmniRCA (its own cases)</span></div>
+<div class="bars">
+<span>All test cases (339)</span><div class="bl"><div><span class="bar d" style="width:72.9%"></span>72.9</div><div><span class="bar c" style="width:59.6%"></span>59.6</div></div>
+<span>Unseen apps (245)</span><div class="bl"><div><span class="bar d" style="width:66.1%"></span>66.1</div><div><span class="bar c" style="width:55.5%"></span>55.5</div></div>
+<span>Misleading cases (137)</span><div class="bl"><div><span class="bar d" style="width:56.9%"></span>56.9</div><div><span class="bar c" style="width:0.5%"></span>0</div></div>
+<span>Aligned cases (202)</span><div class="bl"><div><span class="bar d" style="width:83.7%"></span>83.7</div><div><span class="bar c" style="width:100%"></span>100</div></div>
+<span>OmniRCA, 88 cases</span><div class="bl"><div><span class="bar o" style="width:65.9%"></span>65.9</div><div><span class="bar c" style="width:70.5%"></span>70.5</div></div>
+</div>
+<p>DeepRCA fixed 78 cases the control got wrong and broke 33 it got right (p &lt; 0.001). Every fix is on a <b>misleading</b> case, where the loudest service is not the cause; every break is on an <b>aligned</b> case, where statistics alone already had it.</p>
+<p class="src">Sources: results/wave_w12_r1_accuracy.csv; OmniRCA transcribed from "OmniRCA Under Test".</p>
+
+<h2 id="compare">5 · Fair comparison on unseen apps</h2>
+<h3>RCAEval baselines, same cases</h3>
+<p>Each baseline runs unchanged through RCAEval; DeepRCA is scored on exactly the unseen cases the baseline answered (its own crashes left out), and the two are compared case by case.</p>
+<div class="wrap"><table>
+<tr><th>Baseline</th><th class="n">Cases</th><th class="n">Baseline</th><th class="n">DeepRCA</th><th class="n">Fixed / broken</th><th class="n">p</th></tr>
+<tr><td>PDiagnose</td><td class="n">46</td><td class="n">69.6</td><td class="n">78.3</td><td class="n">8 / 4</td><td class="n no">0.388</td></tr>
+<tr><td>TraceRCA</td><td class="n">46</td><td class="n">52.2</td><td class="n">78.3</td><td class="n">16 / 4</td><td class="n">0.012</td></tr>
+<tr><td>CIRCA</td><td class="n">243</td><td class="n">38.3</td><td class="n">65.8</td><td class="n">89 / 22</td><td class="n">&lt; 0.001</td></tr>
+<tr><td>Multi-source BARO</td><td class="n">89</td><td class="n">38.2</td><td class="n">85.4</td><td class="n">46 / 4</td><td class="n">&lt; 0.001</td></tr>
+<tr><td>Multi-source CIRCA</td><td class="n">90</td><td class="n">37.8</td><td class="n">85.6</td><td class="n">47 / 4</td><td class="n">&lt; 0.001</td></tr>
+<tr><td>Multi-source RCD</td><td class="n">90</td><td class="n">33.3</td><td class="n">85.6</td><td class="n">52 / 5</td><td class="n">&lt; 0.001</td></tr>
+<tr><td>BARO</td><td class="n">243</td><td class="n">26.7</td><td class="n">65.8</td><td class="n">112 / 17</td><td class="n">&lt; 0.001</td></tr>
+<tr><td>MicroRank</td><td class="n">40</td><td class="n">20.0</td><td class="n">85.0</td><td class="n">28 / 2</td><td class="n">&lt; 0.001</td></tr>
+<tr><td>RCD</td><td class="n">243</td><td class="n">18.9</td><td class="n">65.8</td><td class="n">120 / 6</td><td class="n">&lt; 0.001</td></tr>
+</table></div>
+<p>DeepRCA leads all nine; eight leads are significant. PDiagnose's is not. Counting crashes as misses (RCAEval's rule), all nine are beaten with p ≤ 0.002. At the top 3 the gap narrows (multi-source BARO 87.6 vs 92.1): the advantage is mainly the #1 answer.</p>
+<p class="src">Sources: results/p2_unseen_baselines.csv; reasons for every case without a ranking in results/baselines_gaps.csv.</p>
+
+<h3>Agent systems, each against its own statistical baseline</h3>
+<p>The systems ran on different cases with different models, so each is measured by its gain over its own statistics. Indicative, not a paired test.</p>
+<div class="wrap"><table>
+<tr><th>System</th><th>Data</th><th class="n">AC@1</th><th class="n">Own baseline</th><th class="n">Gain</th></tr>
+<tr><td>DeepRCA (Gemini 3.7 Flash)</td><td>RE2-TT, unseen</td><td class="n">84.8</td><td class="n">39.1</td><td class="n ok">+45.7</td></tr>
+<tr><td>DeepRCA</td><td>RE2-SS + RE2-TT, unseen</td><td class="n">85.6</td><td class="n">56.7</td><td class="n ok">+28.9</td></tr>
+<tr><td>DeepRCA</td><td>all 6 unseen datasets</td><td class="n">66.1</td><td class="n">55.5</td><td class="n ok">+10.6</td></tr>
+<tr><td>OmniRCA (GPT-4o)</td><td>RE2-TT</td><td class="n">42.9</td><td class="n">60.7</td><td class="n no">−17.9</td></tr>
+<tr><td>RCLAgent (Claude-3.5-Sonnet, paper)</td><td>RE2-OB</td><td class="n">52.3</td><td class="n">18.9 (its BARO)</td><td class="n ok">+33.4</td></tr>
+</table></div>
+<p class="src">Sources: results/p2_unseen_systems.csv, results/rclagent_compare_w12_r1.csv. DeepRCA's own RE2-OB score (24 of 24) is an upper bound: Online Boutique is its tuning app.</p>
+
+<h2 id="framework">6 · The analysis framework</h2>
+<p>The same four themes used to dissect OmniRCA, so the two systems can be read side by side.</p>
+<div class="wrap"><table>
+<tr><th>Theme</th><th>Questions</th><th>Status</th></tr>
+<tr><td>A · How it decides</td><td>Who decides (A1) · planted leads (A2) · does evidence argue against (A2.4) · suspect elimination</td><td class="ok">done</td></tr>
+<tr><td>B · What it can diagnose</td><td>Source vs symptom (B1) · fault kinds (B2) · error types (B3) · what predicts failure (B4)</td><td class="ok">done</td></tr>
+<tr><td>C · What drives the numbers</td><td>Ablations (C1) · vs statistics and baselines (C2) · hidden names (C3) · faithfulness (C4) · suspect list vs answer (C5) · rule compliance</td><td class="ok">done</td></tr>
+<tr><td>D · Can we trust it</td><td>Rerun stability (D1) · confidence calibration (D2)</td><td class="ok">done</td></tr>
+<tr><td>E · New for this system</td><td>Cost (E1) · missing data types (E3) · transfer (E4) · model size (E5)</td><td class="ok">done</td></tr>
+</table></div>
+<p class="src">Full numbers per analysis: reports/FINDINGS.md.</p>
+
+<h2 id="findings">7 · What the dissection found</h2>
+<div class="two">
+<div class="card"><h3>A · No single part decides</h3><p>OmniRCA's first agent fixed the answer in 82% of runs. In DeepRCA the main agent overrode the plain evidence count in 184 cases, fixing 121 and breaking 4; where it overrode, that count alone was right only 9.8% of the time.</p><p class="src">results/p2_a1_summary.csv</p></div>
+<div class="card"><h3>A2 · Baseless leads rejected</h3><p>0 of 40 implausible planted suspects accepted (OmniRCA: 9 of 20 before its fix); the true cause was still found in 37 of 40. Believable wrong leads got through 5 of 40 times, 4 of them when planted first in the statistical ranking.</p><p class="src">results/p2_a2_summary.csv</p></div>
+<div class="card"><h3>A2.4 · Evidence can argue against</h3><p>164 findings cleared their suspect and 215 of 1,166 hypotheses were refuted (OmniRCA: 0 of 329 items). Defect: 84.2% of tester answers save no evidence-for items.</p><p class="src">results/p2_a24_summary.csv</p></div>
+<div class="card"><h3>B3 · Different errors</h3><p>OmniRCA's errors blamed a caller of the cause 77% of the time; DeepRCA's 10%. Most of DeepRCA's errors are unrelated picks on Train Ticket, the largest app.</p><p class="src">results/p2_b3_summary.csv</p></div>
+<div class="card"><h3>C1 · What matters</h3><p>The smaller model scores 57.0% vs 69.0% (p = 0.023); with traces off, 48.1% vs 77.8% on 27 cases (p = 0.077). Removing the guardrail, the critic or the agent-driven loop leaves accuracy unchanged; the guardrail's value is robustness (A2).</p><p class="src">results/p2_variants_summary.csv</p></div>
+<div class="card"><h3>C5 · The suspect list is the bottleneck</h3><p>In 61 of the 92 wrong answers the true cause was never on the code suspect list. When it was, the agent picked it 87.8% of the time. Traces miss faults that barely change timing or errors.</p><p class="src">results/p2_c5_summary.csv, results/p2_c5_by_fault.csv</p></div>
+<div class="card"><h3>C3, C4 · Honest numbers</h3><p>Hidden service names: 77.8% either way on 27 cases. 99.7% of quoted numbers match recomputation; prompt rules followed 98.8–99.7%, with "for each" rules enforced in code.</p><p class="src">results/p2_variants_summary.csv, results/p2_c4_summary.csv, results/p2_compliance_summary.csv</p></div>
+<div class="card"><h3>D · Noise and confidence</h3><p>On a 34-case rerun the #1 answer stayed the same in 82.4% of cases, about OmniRCA's rate. Confidence averages 0.686 against 72.9% accuracy, too high on Train Ticket and too low elsewhere (AUROC 0.634).</p><p class="src">results/p2_variants_summary.csv, results/p2_d2_calibration.csv</p></div>
+</div>
+
+<h2 id="verdict">8 · Verdict</h2>
+<div class="two">
+<div class="card"><h3 class="ok">Held up</h3><ul>
+<li>Beats the statistical control: 72.9% vs 59.6% (p &lt; 0.001); OmniRCA did not.</li>
+<li>Transfers: on unseen apps it leads every RCAEval baseline, eight of nine significantly.</li>
+<li>Code-enforced positive evidence: 0 of 40 baseless leads accepted.</li>
+<li>Evidence can clear a suspect; agreement is no longer automatic.</li>
+<li>Errors no longer flow upstream to the caller (10% vs 77%).</li>
+<li>Faithful numbers and rule-following once rules move into code.</li>
+</ul></div>
+<div class="card"><h3 class="no">Did not hold up</h3><ul>
+<li>It still breaks easy cases: 33 of 202 aligned cases lost.</li>
+<li>The suspect list holds the true cause in only 75.2% of cases; that causes 61 of the 92 errors.</li>
+<li>Fault type is right only 41.3% of the time.</li>
+<li>Not significantly better than PDiagnose on the cases PDiagnose answers.</li>
+<li>Confidence is not calibrated across apps.</li>
+<li>Tester verdicts usually carry no saved proof.</li>
+</ul></div>
+</div>
+<h3>What the evidence says to change next</h3>
+<ul>
+<li><b>A suspect model that uses all signals</b> (traces, metrics, logs) with high recall, since 61 of 92 errors start there.</li>
+<li><b>A gate for easy cases:</b> return the statistical answer when it is clear-cut, to stop the 33 broken aligned cases.</li>
+<li><b>Rebuild fault typing</b> and make testers save their evidence.</li>
+<li><b>Finish the test set</b> (waves 3–4) and repeat runs before publication.</li>
+</ul>
+
+<h2 id="limits">9 · Honest limits</h2>
+<ul>
+<li><b>One run on half the test set.</b> Waves 3–4 and full repeats were deferred; the stability rerun covers 34 cases, and runs vary by about one answer in six.</li>
+<li><b>Ablations on samples:</b> 100 cases, and 27 for traces off and hidden names.</li>
+<li><b>OmniRCA and RCLAgent were not re-run.</b> Their numbers are transcribed from the OmniRCA report and the RCLAgent paper, with different cases and models: indicative only.</li>
+<li><b>Some baselines crash inside RCAEval's code</b> on part of the data; both counting rules are reported.</li>
+<li><b>MicroCause and CausalRCA were not run</b> (crash inside RCAEval; too slow on the shared server).</li>
+<li><b>The fault start time is given,</b> as in every RCAEval method.</li>
+</ul>
+<p class="src">Every number in this report is produced by a script in analysis/ into a CSV in results/, cited beside it. Detailed per-analysis tables: reports/FINDINGS.md.</p>
+</main>
+</body>
+</html>

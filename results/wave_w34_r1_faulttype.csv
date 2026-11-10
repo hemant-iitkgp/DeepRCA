@@ -1,0 +1,27 @@
+by,group,n_cases,fault_type_accuracy
+true_class,code,36,0.16666666666666666
+true_class,cpu,56,0.7321428571428571
+true_class,delay,57,0.5789473684210527
+true_class,disk,57,0.2982456140350877
+true_class,loss,56,0.0
+true_class,memory,56,0.7321428571428571
+true_class,socket,19,0.0
+dataset,RE1-OB,62,0.532258064516129
+dataset,RE1-SS,62,0.3225806451612903
+dataset,RE1-TT,63,0.4444444444444444
+dataset,RE2-OB,24,0.4583333333333333
+dataset,RE2-SS,46,0.43478260869565216
+dataset,RE2-TT,44,0.45454545454545453
+dataset,RE3-OB,6,0.6666666666666666
+dataset,RE3-SS,15,0.06666666666666667
+dataset,RE3-TT,15,0.06666666666666667
+service_top1,service wrong,107,0.17757009345794392
+service_top1,service right,230,0.5173913043478261
+predicted,code,6,1.0
+predicted,cpu,113,0.36283185840707965
+predicted,delay,83,0.39759036144578314
+predicted,disk,31,0.5483870967741935
+predicted,memory,101,0.40594059405940597
+predicted,socket,1,0.0
+predicted,unknown,2,0.0
+ALL,ALL,337,0.4094955489614243

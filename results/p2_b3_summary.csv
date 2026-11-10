@@ -1,0 +1,17 @@
+role,n,median_hops,true_in_top5,share,scope
+downstream dependency,9,1.0,0.5555555555555556,0.09782608695652174,all
+entry point,4,1.0,0.5,0.043478260869565216,all
+no call graph,25,,0.84,0.2717391304347826,all
+sibling,10,2.0,0.7,0.10869565217391304,all
+unrelated,39,3.0,0.38461538461538464,0.42391304347826086,all
+upstream caller,5,1.0,0.6,0.05434782608695652,all
+OB: downstream dependency,3,,,,by app
+OB: sibling,2,,,,by app
+OB: unrelated,2,,,,by app
+OB: upstream caller,2,,,,by app
+SS: no call graph,25,,,,by app
+TT: downstream dependency,6,,,,by app
+TT: entry point,4,,,,by app
+TT: sibling,8,,,,by app
+TT: unrelated,37,,,,by app
+TT: upstream caller,3,,,,by app

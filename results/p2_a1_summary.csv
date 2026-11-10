@@ -1,0 +1,13 @@
+measure,group,n,share,accuracy,evidence_leader_accuracy,fixed_by_override,broken_by_override
+originates_final_answer,code_tool,60,0.17699115044247787,0.85,,,
+originates_final_answer,critic,2,0.0058997050147492625,0.5,,,
+originates_final_answer,investigator,128,0.3775811209439528,0.6484375,,,
+originates_final_answer,main_agent,105,0.30973451327433627,0.7523809523809524,,,
+originates_final_answer,tester,44,0.12979351032448377,0.75,,,
+changed_running_top,code_tool,92,0.2713864306784661,0.8369565217391305,,,
+changed_running_top,investigator,287,0.8466076696165191,0.7142857142857143,,,
+changed_running_top,tester,125,0.3687315634218289,0.704,,,
+changed_running_top,main_agent,187,0.551622418879056,0.6524064171122995,,,
+changed_running_top,critic,6,0.017699115044247787,0.3333333333333333,,,
+draft_vs_evidence_leader,agrees,153,0.4540059347181009,0.8104575163398693,0.8104575163398693,0.0,0.0
+draft_vs_evidence_leader,overrides,184,0.5459940652818991,0.7336956521739131,0.09782608695652174,121.0,4.0

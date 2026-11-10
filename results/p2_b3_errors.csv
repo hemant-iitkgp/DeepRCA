@@ -1,0 +1,93 @@
+case_id,dataset,system,symptom_aligned,true,blamed,role,hops,true_in_top5
+c6891bd40a4,RE1-OB,OB,True,adservice,checkoutservice,unrelated,,True
+c5d5ecffca9,RE1-OB,OB,False,checkoutservice,cartservice,downstream dependency,1.0,True
+cf6983fdb71,RE1-OB,OB,False,currencyservice,cartservice,sibling,2.0,True
+c3802cfe68a,RE1-OB,OB,False,checkoutservice,emailservice,downstream dependency,1.0,True
+ce6da7666e8,RE1-OB,OB,False,checkoutservice,emailservice,downstream dependency,1.0,True
+c36b8efdc66,RE1-OB,OB,False,checkoutservice,recommendationservice,sibling,2.0,True
+c37091383a0,RE1-OB,OB,False,productcatalogservice,checkoutservice,upstream caller,1.0,True
+c39a07dfec7,RE1-OB,OB,False,adservice,checkoutservice,unrelated,,True
+ca342039413,RE1-OB,OB,False,productcatalogservice,recommendationservice,upstream caller,1.0,True
+c8b7fa8620d,RE1-SS,SS,False,carts,rabbitmq,no call graph,,True
+cf12ea41e26,RE1-SS,SS,False,orders,payment,no call graph,,True
+c1b2aa86169,RE1-SS,SS,True,carts,orders,no call graph,,True
+cf2652cfc37,RE1-SS,SS,True,carts,queue-master,no call graph,,True
+ca95ca70924,RE1-SS,SS,False,catalogue,queue-master,no call graph,,True
+cb0e9942f66,RE1-SS,SS,True,orders,catalogue-db,no call graph,,True
+cb16b6d5155,RE1-SS,SS,False,payment,user,no call graph,,True
+c1fc89aab82,RE1-SS,SS,True,payment,catalogue,no call graph,,True
+c51ecc08bac,RE1-SS,SS,False,catalogue,orders-db,no call graph,,True
+cc08f3159cf,RE1-SS,SS,True,payment,rabbitmq,no call graph,,True
+cc99ba3ce66,RE1-SS,SS,False,carts,rabbitmq,no call graph,,True
+c337fda8693,RE1-TT,TT,False,ts-route-service,ts-user-service,unrelated,3.0,False
+c4274b28ac6,RE1-TT,TT,False,ts-route-service,ts-order-service,sibling,2.0,True
+c432054f869,RE1-TT,TT,False,ts-train-service,ts-food-service,upstream caller,2.0,True
+c4c160e619a,RE1-TT,TT,True,ts-travel-service,ts-config-service,downstream dependency,2.0,False
+c7e90fea700,RE1-TT,TT,False,ts-auth-service,ts-consign-service,unrelated,,True
+c87d53d9e5c,RE1-TT,TT,False,ts-travel-service,ts-payment-service,unrelated,3.0,False
+cae67bac32c,RE1-TT,TT,False,ts-route-service,ts-config-service,unrelated,3.0,True
+cec07967af1,RE1-TT,TT,False,ts-order-service,ts-config-service,sibling,2.0,False
+c1b2f56fa94,RE1-TT,TT,False,ts-auth-service,ts-config-service,unrelated,,False
+c2f6e467d7f,RE1-TT,TT,False,ts-auth-service,ts-security-service,unrelated,,False
+c4706af3e32,RE1-TT,TT,False,ts-train-service,ts-price-service,sibling,2.0,False
+c685f9467c8,RE1-TT,TT,True,ts-auth-service,ts-config-service,unrelated,,False
+c7dffa3afc1,RE1-TT,TT,True,ts-order-service,ts-admin-user-service,unrelated,,False
+c94d45e1c79,RE1-TT,TT,True,ts-route-service,ts-ticket-office-service,unrelated,,False
+cb2f3cc1643,RE1-TT,TT,False,ts-order-service,ts-inside-payment-service,entry point,1.0,True
+cbd5893a8dc,RE1-TT,TT,False,ts-travel-service,ts-admin-travel-service,entry point,1.0,False
+ce59674f5ad,RE1-TT,TT,True,ts-train-service,ts-train-mongo,unrelated,,True
+ce86ec02604,RE1-TT,TT,True,ts-travel-service,ts-payment-service,unrelated,3.0,False
+ce89538749f,RE1-TT,TT,True,ts-route-service,ts-station-service,sibling,2.0,True
+c0d4f0d49fb,RE1-TT,TT,True,ts-order-service,ts-config-service,sibling,2.0,True
+c2d1c246e16,RE1-TT,TT,True,ts-order-service,ts-config-service,sibling,2.0,True
+c350b82a7cc,RE1-TT,TT,True,ts-auth-service,ts-train-service,unrelated,,False
+c556ffada21,RE1-TT,TT,True,ts-auth-service,ts-order-service,unrelated,,True
+c91fd2eb9f2,RE1-TT,TT,True,ts-order-service,ts-food-map-service,unrelated,3.0,False
+c9ba9ca1785,RE1-TT,TT,True,ts-route-service,ts-travel-plan-service,unrelated,,False
+ca6e37158e9,RE1-TT,TT,True,ts-travel-service,ts-basic-service,downstream dependency,2.0,False
+c0daf48bb01,RE1-TT,TT,True,ts-train-service,ts-preserve-service,entry point,2.0,False
+c3b47e61c52,RE1-TT,TT,False,ts-train-service,ts-inside-payment-service,unrelated,3.0,False
+c3cbf4a35f0,RE1-TT,TT,False,ts-route-service,ts-rebook-service,unrelated,,False
+c4538dc51ed,RE1-TT,TT,False,ts-travel-service,ts-order-service,downstream dependency,1.0,True
+c6c7b301f82,RE1-TT,TT,False,ts-auth-service,ts-admin-basic-info-service,unrelated,,False
+c8d744aea44,RE1-TT,TT,False,ts-order-service,ts-payment-service,sibling,2.0,False
+cafdf97fd05,RE1-TT,TT,False,ts-order-service,ts-inside-payment-service,entry point,1.0,True
+cc39589afb3,RE1-TT,TT,False,ts-auth-service,ts-payment-service,unrelated,,False
+cc41b754feb,RE1-TT,TT,False,ts-train-service,ts-config-service,unrelated,3.0,False
+cf88ee0a1d6,RE1-TT,TT,False,ts-travel-service,ts-train-service,downstream dependency,1.0,False
+cf9d69d0c18,RE1-TT,TT,False,ts-travel-service,ts-rebook-service,unrelated,,False
+cfad44ff2f7,RE1-TT,TT,False,ts-route-service,ts-admin-order-service,unrelated,,False
+c2f20079640,RE1-TT,TT,True,ts-auth-service,ts-price-service,unrelated,,False
+c4e6953f87d,RE1-TT,TT,True,ts-train-service,ts-config-service,unrelated,3.0,True
+c7ba533cdca,RE1-TT,TT,False,ts-travel-service,ts-train-service,downstream dependency,1.0,True
+cbff9afde7d,RE1-TT,TT,False,ts-auth-service,ts-ticketinfo-service,unrelated,,False
+cc6d3dcd196,RE1-TT,TT,True,ts-travel-service,ts-order-service,downstream dependency,1.0,False
+c174d865f81,RE2-SS,SS,True,orders,session-db,no call graph,,True
+c4cf993d757,RE2-SS,SS,True,payment,orders-db,no call graph,,True
+c8c55ce36a6,RE2-SS,SS,True,catalogue,queue-master,no call graph,,False
+c3391aa1b40,RE2-SS,SS,False,orders,payment,no call graph,,True
+ca58018c056,RE2-SS,SS,False,carts,catalogue,no call graph,,True
+cce9a9c84c5,RE2-SS,SS,False,user,orders,no call graph,,True
+c0a2532895c,RE2-TT,TT,False,ts-train-service,ts-assurance-service,unrelated,2.0,True
+c3b5acccb4c,RE2-TT,TT,False,ts-train-service,ts-payment-service,unrelated,2.0,True
+cecaa8e8545,RE2-TT,TT,True,ts-route-service,ts-ticketinfo-service,upstream caller,2.0,False
+c39d0db0388,RE2-TT,TT,False,ts-auth-service,ts-inside-payment-service,unrelated,,False
+c49b82ee006,RE2-TT,TT,False,ts-travel-service,ts-seat-service,upstream caller,1.0,False
+ce84d965186,RE2-TT,TT,False,ts-auth-service,ts-user-service,unrelated,,False
+cd60ca5ec7f,RE2-TT,TT,True,ts-route-service,ts-assurance-service,unrelated,2.0,True
+ce667c0f5b7,RE3-SS,SS,True,orders,rabbitmq,no call graph,,False
+ce3db782d87,RE3-SS,SS,False,front-end,session-db,no call graph,,True
+c6849af57dd,RE3-SS,SS,True,front-end,rabbitmq,no call graph,,True
+c7fadbb8db1,RE3-SS,SS,False,carts,rabbitmq,no call graph,,False
+c9bf84ed0f9,RE3-SS,SS,False,carts,session-db,no call graph,,True
+c06972371a8,RE3-SS,SS,False,carts,session-db,no call graph,,True
+c1f4f853cfc,RE3-SS,SS,False,carts,orders,no call graph,,False
+cc4c4bad8c7,RE3-SS,SS,False,orders,session-db,no call graph,,True
+c51493523b2,RE3-TT,TT,False,ts-auth-service,ts-assurance-service,unrelated,,False
+c2117e3a576,RE3-TT,TT,True,ts-auth-service,ts-assurance-service,unrelated,,True
+c94ad116e14,RE3-TT,TT,False,ts-auth-service,ts-order-service,unrelated,,True
+c9aa6859205,RE3-TT,TT,True,ts-route-service,ts-consign-service,unrelated,2.0,False
+c8938f666e5,RE3-TT,TT,False,ts-auth-service,ts-preserve-service,unrelated,,True
+c4414bb6384,RE3-TT,TT,False,ts-auth-service,ts-assurance-service,unrelated,,True
+c5fe4a07017,RE3-TT,TT,False,ts-auth-service,ts-order-other-service,unrelated,,True
+ce7bd5b968a,RE3-TT,TT,False,ts-route-service,ts-station-service,sibling,2.0,True

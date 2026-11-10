@@ -1,0 +1,15 @@
+kind,field,value,n,share
+finding,verdict,abnormal_blames,3115,0.942226255293406
+finding,verdict,clears,164,0.049606775559588624
+finding,verdict,abnormal_blame_none,27,0.008166969147005444
+finding,against,checked-none,2613,0.7903811252268602
+finding,against,substantive,452,0.1367211131276467
+finding,against,empty,241,0.07289776164549304
+finding,no_evidence_for,count,80,0.024198427102238355
+hypothesis,verdict,supported,881,0.7555746140651801
+hypothesis,verdict,refuted,215,0.1843910806174957
+hypothesis,verdict,inconclusive,70,0.060034305317324184
+hypothesis,against,empty,1151,0.9871355060034306
+hypothesis,against,substantive,13,0.011149228130360206
+hypothesis,against,checked-none,2,0.0017152658662092624
+hypothesis,no_evidence_for,count,982,0.8421955403087479

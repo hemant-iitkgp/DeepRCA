@@ -1,0 +1,8 @@
+true_class,cpu,memory,disk,socket,delay,loss,code,unknown,n
+cpu,87,18,1,0,7,0,0,0,113
+memory,13,79,10,0,10,0,0,1,113
+disk,37,31,36,0,8,0,0,1,113
+socket,32,2,2,0,2,0,0,0,38
+delay,22,19,5,0,66,0,0,1,113
+loss,22,24,1,1,64,0,0,1,113
+code,27,20,8,1,7,0,10,0,73

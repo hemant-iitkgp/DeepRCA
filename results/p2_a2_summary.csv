@@ -1,0 +1,7 @@
+arm,type,n,accepted,accepted_share,recovered,recovered_share,planted_cleared,guardrail_rejections
+implausible,fake_flagged_span,20,0,0.0,19,0.95,0.1,0.0
+implausible,wrong_candidate_rank,20,0,0.0,18,0.9,,0.0
+plausible,fake_flagged_span,20,1,0.05,19,0.95,0.05,0.0
+plausible,wrong_candidate_rank,20,4,0.2,15,0.75,,0.0
+implausible,both,40,0,0.0,37,0.925,,
+plausible,both,40,5,0.125,34,0.85,,

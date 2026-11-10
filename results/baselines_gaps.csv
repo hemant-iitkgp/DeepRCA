@@ -1,0 +1,27 @@
+method,dataset,status,n_cases,reason
+baro,RE3-TT,missing,2,"RCAEval main.py cannot parse the case folder name (variant suffix, e.g. '<service>_f3_1'), so main.py never sees the case"
+circa,RE3-TT,missing,2,"RCAEval main.py cannot parse the case folder name (variant suffix, e.g. '<service>_f3_1'), so main.py never sees the case"
+microrank,RE2-TT,failed,3,method crash: KeyError: 'ts-order-other-service_getMore ts.orders'
+microrank,RE2-TT,failed,1,method crash: KeyError: 'ts-auth-service_GET /error'
+microrank,RE2-TT,failed,1,method crash: KeyError: 'ts-preserve-other-service_POST'
+microrank,RE2-TT,failed,1,method crash: KeyError: 'ts-order-other-service_killCursors ts.orders'
+microrank,RE3-OB,failed,1,method crash: KeyError: 'currencyservice_Export'
+microrank,RE3-SS,failed,6,method crash: ValueError: zero-size array to reduction operation maximum which has no identity
+microrank,RE3-TT,failed,8,method crash: KeyError: 'ts-route-service_RouteRepository.save'
+microrank,RE3-TT,failed,7,method crash: KeyError: 'ts-admin-travel-service_OnCommittedResponseWrapper.sendError'
+mmbaro,RE2-TT,failed,1,"method crash: ValueError: Found array with 0 sample(s) (shape=(0, 1)) while a minimum of 1 is required by RobustScaler (RCAEval baro.py mmnsigma; rerun alone in w12fill_a, sa"
+pdiagnose,RE2-TT,failed,3,method crash: KeyError: 'ts-order-other-service_getMore ts.orders'
+pdiagnose,RE2-TT,failed,1,method crash: KeyError: 'ts-auth-service_GET /error'
+pdiagnose,RE2-TT,failed,1,method crash: KeyError: 'ts-preserve-other-service_POST'
+pdiagnose,RE2-TT,failed,1,method crash: KeyError: 'ts-order-other-service_killCursors ts.orders'
+pdiagnose,RE3-OB,failed,1,method crash: KeyError: 'currencyservice_Export'
+pdiagnose,RE3-TT,failed,8,method crash: KeyError: 'ts-route-service_RouteRepository.save'
+pdiagnose,RE3-TT,failed,7,method crash: KeyError: 'ts-admin-travel-service_OnCommittedResponseWrapper.sendError'
+rcd,RE3-TT,missing,2,"RCAEval main.py cannot parse the case folder name (variant suffix, e.g. '<service>_f3_1'), so main.py never sees the case"
+tracerca,RE2-TT,failed,3,method crash: KeyError: 'ts-order-other-service_getMore ts.orders'
+tracerca,RE2-TT,failed,1,method crash: KeyError: 'ts-auth-service_GET /error'
+tracerca,RE2-TT,failed,1,method crash: KeyError: 'ts-preserve-other-service_POST'
+tracerca,RE2-TT,failed,1,method crash: KeyError: 'ts-order-other-service_killCursors ts.orders'
+tracerca,RE3-OB,failed,1,method crash: KeyError: 'currencyservice_Export'
+tracerca,RE3-TT,failed,8,method crash: KeyError: 'ts-route-service_RouteRepository.save'
+tracerca,RE3-TT,failed,7,method crash: KeyError: 'ts-admin-travel-service_OnCommittedResponseWrapper.sendError'

@@ -1,0 +1,10 @@
+type,status,n,share_of_type
+edge_gap,mismatch,1,0.007194244604316547
+edge_gap,unchecked,13,0.09352517985611511
+edge_gap,verified,125,0.8992805755395683
+metric,mismatch,29,0.002934034803723189
+metric,unchecked,217,0.021954674220963172
+metric,verified,9638,0.9751112909753137
+own_time,unchecked,3,0.015228426395939087
+own_time,verified,194,0.9847715736040609
+ALL checked,verified,9957,0.9969960949234005

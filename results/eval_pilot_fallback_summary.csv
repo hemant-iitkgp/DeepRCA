@@ -1,0 +1,4 @@
+dataset,n_rows,n_runs,completed_ok,crashed,limit_hit,report_accepted,report_forced,report_none,mean_cost_usd,mean_latency_s,mean_launches,mean_rejections,symptom_aligned_share,v3_AC@1,v3_AC@3,v3_AC@5,v3_Avg@5,v4_AC@1,v4_AC@3,v4_AC@5,v4_Avg@5,control_AC@1,v3_acc_aligned,v3_acc_misleading,v4_acc_aligned,v4_acc_misleading,n_aligned,n_misleading
+ALL,59,1,59,0,0,59,0,0,0.37052457627118646,964.7,7.983050847457627,0.0,0.847457627118644,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.847457627118644,1.0,1.0,1.0,1.0,50,9
+RE2-OB,42,1,42,0,0,42,0,0,0.3883004761904762,1100.3761904761905,8.571428571428571,0.0,0.8571428571428571,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.8571428571428571,1.0,1.0,1.0,1.0,36,6
+RE3-OB,17,1,17,0,0,17,0,0,0.32660764705882356,629.5,6.529411764705882,0.0,0.8235294117647058,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.8235294117647058,1.0,1.0,1.0,1.0,14,3
